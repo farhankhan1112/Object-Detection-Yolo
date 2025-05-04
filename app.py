@@ -13,6 +13,10 @@ from ultralytics.nn.tasks import DetectionModel
 add_safe_globals([DetectionModel])
 model = YOLO("yolov8n.pt")
 
+from ultralytics import YOLO
+YOLO("yolov8n.pt")  # Will auto-download if missing
+
+
 
 # Load class labels
 with open("coco.names", "r") as f:
