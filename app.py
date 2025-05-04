@@ -11,6 +11,14 @@ import os
 # Load YOLOv8 model (auto-download if not present)
 model = YOLO("yolov8n.pt")
 
+from ultralytics import YOLO
+try:
+    model = YOLO("yolov8n.pt")
+    print("Model loaded successfully")
+except Exception as e:
+    print(f"Error loading model: {str(e)}")
+
+
 # Load class labels from coco.names or fallback to default names
 try:
     with open("coco.names", "r") as f:
