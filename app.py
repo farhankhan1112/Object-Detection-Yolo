@@ -6,8 +6,13 @@ from ultralytics import YOLO
 import numpy as np
 import os
 
-# Load YOLOv8 model
+import torch
+from torch.serialization import add_safe_globals
+from ultralytics.nn.tasks import DetectionModel
+
+add_safe_globals([DetectionModel])
 model = YOLO("yolov8n.pt")
+
 
 # Load class labels
 with open("coco.names", "r") as f:
