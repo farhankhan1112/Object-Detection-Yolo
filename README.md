@@ -3,9 +3,9 @@ This is a Streamlit web application for real-time object detection using the YOL
 
 # 🚀 Demo
 
-Upload an image or video to detect objects.
+- Upload an image or video to detect objects.
 
-Or use your webcam for real-time object detection.
+- Or use your webcam for real-time object detection.
 
 # 📸 Features
 📷 Image Detection
