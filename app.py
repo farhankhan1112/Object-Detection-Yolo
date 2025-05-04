@@ -1,3 +1,5 @@
+# yolov8_streamlit_app.py
+
 import streamlit as st
 import cv2
 from PIL import Image
@@ -6,23 +8,17 @@ from ultralytics import YOLO
 import numpy as np
 import os
 
-import torch
-from torch.serialization import add_safe_globals
-from ultralytics.nn.tasks import DetectionModel
-
-add_safe_globals([DetectionModel])
+# Load YOLOv8 model (auto-download if not present)
 model = YOLO("yolov8n.pt")
 
-from ultralytics import YOLO
-YOLO("yolov8n.pt")  # Will auto-download if missing
+# Load class labels from coco.names or fallback to default names
+try:
+    with open("coco.names", "r") as f:
+        class_names = [line.strip() for line in f.readlines()]
+except FileNotFoundError:
+    class_names = model.model.names  # fallback to internal class names
 
-
-
-# Load class labels
-with open("coco.names", "r") as f:
-    class_names = [line.strip() for line in f.readlines()]
-
-# Streamlit UI
+# Streamlit UI setup
 st.set_page_config(page_title="YOLOv8 Object Detection", layout="centered")
 st.title("🧠 YOLOv8 Object Detection App")
 st.sidebar.title("Choose Input Source")
@@ -48,7 +44,7 @@ if source_type == "Image":
         img = Image.open(uploaded_img)
         img_array = np.array(img)
         results = model.predict(img_array)
-        annotated = draw_results(img_array, results)
+        annotated = draw_results(img_array.copy(), results)
         st.image(annotated, caption="Detected Image", use_container_width=True)
 
 elif source_type == "Video":
@@ -63,7 +59,7 @@ elif source_type == "Video":
             if not ret:
                 break
             results = model.predict(frame)
-            annotated = draw_results(frame, results)
+            annotated = draw_results(frame.copy(), results)
             stframe.image(annotated, channels="BGR", use_container_width=True)
         cap.release()
 
@@ -79,7 +75,7 @@ elif source_type == "Webcam":
             st.error("Failed to read from webcam.")
             break
         results = model.predict(frame)
-        annotated = draw_results(frame, results)
+        annotated = draw_results(frame.copy(), results)
         FRAME_WINDOW.image(annotated, channels="BGR")
 
     cap.release()
