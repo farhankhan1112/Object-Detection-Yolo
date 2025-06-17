@@ -1,26 +1,18 @@
 # Object-Detection-Yolo
 This is a Streamlit web application for real-time object detection using the YOLOv8 model by Ultralytics. It supports image, video, and webcam inputs for detecting objects from the COCO dataset.
 
-# 🚀 Demo :
-
-- Upload an image or video to detect objects.
-
-- Or use your webcam for real-time object detection.
-
 # 📸 Features :
-- 📷 Image Detection
-- 🎞️ Video Detection
-- 🎥 Webcam Detection (Live)
-- 🧠 Powered by YOLOv8n (Ultralytics)
-- 🖼️ Visualizes bounding boxes and labels with confidence scores.
+- 📷 Image Detection : Upload images (JPG, JPEG, PNG) to detect objects with bounding boxes and confidence scores.
+- 🎞️ Video Detection : Upload videos ( MP4 ) for frame-by-frame object detection, displayed in real time.
+- 🎥 Webcam Detection (Live) : Use a webcam for live object detection, with results streamed directly in the app.
+- 📜 COCO Class Support : Detects objects from the COCO dataset's 80 classes, with labels loaded from `coco.names`.
+- 
 
 # 🧰 Technologies Used :
-- Streamlit
-- YOLOv8 (Ultralytics)
-- OpenCV
-- NumPy
-- Pillow (PIL)
+- **Python**: Core programming language for the application.
+- **Streamlit**: A Python library for creating interactive web applications.
+- **Ultralytics YOLOv8**: A state-of-the-art object detection model for performing real-time object detection.
+- **OpenCV (cv2)**: For image and video processing, including drawing bounding boxes and text on detected objects.
+- **Pillow (PIL)**: For handling image uploads and conversions.
 
-# Add COCO class names file :
-- Create a file coco.names with 80 class names (from the COCO dataset).
 
